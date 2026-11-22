@@ -1,0 +1,12 @@
+<div class="ticker" aria-label="Market moves">
+  <div class="ticker-track">
+    {% for round in (1..2) %}
+      {% for t in site.data.ticker %}
+        <span class="tick">
+          <b>{{ t.name }}</b>
+          <span class="{% if t.change < 0 %}down{% else %}up{% endif %}">{% if t.change > 0 %}+{% endif %}{{ t.change }}%</span>
+        </span>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>

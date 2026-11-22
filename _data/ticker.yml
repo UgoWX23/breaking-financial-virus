@@ -1,0 +1,13 @@
+# PLACEHOLDER values. The notebook should overwrite this file.
+- name: Energy
+  change: -58.0
+- name: Technology
+  change: -30.0
+- name: Financials
+  change: -42.0
+- name: Utilities
+  change: -35.0
+- name: Healthcare
+  change: -22.0
+- name: VIX
+  change: 8.8
