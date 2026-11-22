@@ -39,12 +39,20 @@ a{color:inherit}
 .stamp{color:#666;font-size:.85rem;margin:0 0 20px}
 .story iframe,.story img{max-width:100%}
 
-.ad{border:1px solid var(--line);background:#000;color:#fff;padding:16px;border-radius:6px}
-.ad-label{margin:0 0 10px;font-size:.7rem;color:#aaa}
+.ad{border:1px solid var(--line);background:#000;color:#fff;padding:16px;border-radius:6px;margin:0 0 16px}
+.ad-label{margin:0 0 10px;font-size:.7rem;opacity:.7}
 .ad-title{margin:0 0 6px;font-size:1.25rem;font-weight:800;line-height:1.2}
-.ad-body{margin:0 0 14px;color:#ddd;font-size:.9rem}
-.ad-btn{display:inline-block;background:var(--red);padding:8px 14px;border-radius:4px;font-weight:700}
-.ad-small{margin:12px 0 0;font-size:.7rem;color:#aaa}
+.ad-body{margin:0 0 14px;font-size:.9rem;opacity:.9}
+.ad-btn{display:inline-block;background:var(--red);color:#fff;padding:8px 14px;border-radius:4px;font-weight:700}
+.ad-small{margin:12px 0 0;font-size:.7rem;opacity:.7}
+.ad.t-green{background:#1f3a2e}
+.ad.t-gold{background:#f5c542;color:#1a1a1a;border-color:#d9a800}
+.ad.t-white{background:#fff;color:#1a1a1a}
+.ad.t-white .ad-btn{background:#1a1a1a}
+.ad-rotor .ad{display:none}
+.ad-rotor .ad.on{display:block}
+.ad-wide{display:block;max-width:none;margin:28px 0}
+.ad-wide .ad-title{font-size:1.6rem}
 
 .foot{padding:20px;border-top:1px solid var(--line);color:#666;font-size:.8rem;text-align:center}
 @media (max-width:700px){.headline{font-size:1.8rem}.side{flex:1 1 100%}}

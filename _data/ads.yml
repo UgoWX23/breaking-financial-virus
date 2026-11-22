@@ -1,0 +1,52 @@
+# One entry per fictional ad. Add as many as you like.
+# theme: t-dark | t-green | t-gold | t-white
+- title: "ADA Bank: contagion is accelerating. Are you?"
+  body: "Follow the volatility of the panic leaders."
+  button: "Open an ADA account"
+  small: "Losses may exceed deposits. So may correlations."
+  theme: t-dark
+- title: "Entering Contagion County"
+  body: "Next exit: Panic Selling. Population: your portfolio."
+  button: "Take the safe exit"
+  small: "Speed limit: 3 sigma."
+  theme: t-green
+- title: "ADA Dental Hedge: bear markets bite."
+  body: "Floss your portfolio before the drawdown."
+  button: "Book a checkup"
+  small: "Cavities in your portfolio are not covered."
+  theme: t-white
+- title: "ADA Coin: 100% uncorrelated with the market."
+  body: "Until the day everything fell together."
+  button: "Diversify now"
+  small: "In a crisis, correlations go to 1."
+  theme: t-gold
+- title: "Ada Lovelace Capital"
+  body: "The first algorithm, still looking for alpha since 1843."
+  button: "Read the backtest"
+  small: "Past performance is a 19th-century concept."
+  theme: t-white
+- title: "ADA Sugar Rush ETF"
+  body: "Spikes fast. Crashes faster."
+  button: "Check your levels"
+  small: "Not recommended for long-term holders."
+  theme: t-dark
+- title: "ADA Aeronautical Hedge"
+  body: "Don't go down with the plane."
+  button: "Get a parachute"
+  small: "Parachute not included."
+  theme: t-green
+- title: "ADA Detective Agency"
+  body: "Who sold first? We find patient zero, using only prices and volumes."
+  button: "Hire a detective"
+  small: "Lead-lag is not causation. We checked."
+  theme: t-dark
+- title: "ADA Insurance"
+  body: "We cover everything except pandemics, crashes and correlation spikes."
+  button: "Get a quote"
+  small: "Exclusions apply to all exclusions."
+  theme: t-gold
+- title: "ADA Volatility Spa"
+  body: "Relax. The VIX is only at 82."
+  button: "Book a massage"
+  small: "Results may vary by regime."
+  theme: t-white
