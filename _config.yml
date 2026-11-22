@@ -5,7 +5,17 @@ show_downloads: True
 navigation:
   - title: Home
     url: /
+  - title: Context
+    url: /contexte/
   - title: Origin
-    url: origine
-  - title: Sectors
-    url: secteurs
+    url: /origine/
+  - title: Within sectors
+    url: /contagion/
+  - title: Across sectors
+    url: /sectors/
+  - title: Regions
+    url: /regions/
+  - title: Methods
+    url: /methodes/
+  - title: Team
+    url: /equipe/

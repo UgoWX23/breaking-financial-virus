@@ -1,0 +1,10 @@
+<figure class="fig">
+  {% if include.src %}
+    <iframe src="{{ include.src | relative_url }}" loading="lazy" title="{{ include.caption }}"></iframe>
+  {% elsif include.img %}
+    <img src="{{ include.img | relative_url }}" alt="{{ include.caption }}">
+  {% else %}
+    <div class="fig-todo"><b>Figure to come</b><span>{{ include.todo }}</span></div>
+  {% endif %}
+  <figcaption>{{ include.caption }}</figcaption>
+</figure>
