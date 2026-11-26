@@ -461,6 +461,8 @@ a.card:hover{border-color:var(--ink)}
 .zz-date time{display:inline-block;padding:2px 9px;background:var(--red);color:#fff;border-radius:3px;font-family:var(--display);font-weight:700;font-size:1.05rem}
 .zz-card h3{margin:10px 0 4px;font-family:var(--display);font-weight:800;font-size:1.35rem;line-height:1.1}
 .zz-card p{margin:0;font-family:var(--text);font-size:1rem;line-height:1.5}
+.zz-src{margin-top:8px !important;font-family:var(--ui) !important;font-size:.8rem !important;color:var(--muted)}
+.zz-src a{color:var(--muted)}
 .zz-img{margin:0;border-radius:6px;overflow:hidden}
 .zz-img img{display:block;width:100%;height:170px;object-fit:cover}
 .zz-img figcaption{padding:4px 0 0;font-size:.72rem;color:var(--muted)}

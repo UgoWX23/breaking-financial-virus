@@ -5,18 +5,21 @@
     <span class="zz-dot" aria-hidden="true"></span>
     <div class="zz-card">
       <p class="zz-date"><time>{{ e.date }}</time></p>
-      {% if e.image and e.image != "" %}
+      {% assign img_ok = false %}
+      {% if e.image and e.image != "" %}{% assign img_path = e.image | prepend: "/" %}{% for sf in site.static_files %}{% if sf.path == img_path %}{% assign img_ok = true %}{% endif %}{% endfor %}{% endif %}
+      {% if img_ok %}
       <figure class="zz-img"><img src="{{ e.image | prepend: '/' | relative_url }}" alt="{{ e.alt | default: e.title }}" loading="lazy">{% if e.credit and e.credit != "" %}<figcaption>{{ e.credit }}</figcaption>{% endif %}</figure>
       {% else %}
       <div class="zz-img zz-img-todo"><span>Image to find</span>{{ e.image_idea }}</div>
       {% endif %}
       <h3>{{ e.title }}</h3>
       <p>{{ e.text }}</p>
+      {% if e.source_url and e.source_url != "" %}<p class="zz-src">Source: <a href="{{ e.source_url }}" target="_blank" rel="noopener">{{ e.source }}</a></p>{% endif %}
     </div>
   </li>
   {% endfor %}
 </ol>
-<div class="todo"><p class="step-label">To do for the team</p><p>Check every date against a source and cite it. Find one image per date (free licence, credited), put it in <code>assets/img/context/</code> and fill <code>image:</code> and <code>credit:</code> in <code>_data/context.yml</code>.</p></div>
+<div class="todo"><p class="step-label">To do for the team</p><p>For each date, download the image from <code>image_page</code> in <code>_data/context.yml</code>, save it in <code>assets/img/context/</code> under the name given in <code>image:</code>, and copy the author and licence into <code>credit:</code>.</p></div>
 
 <section class="sub" id="why-covid">
   <header class="sub-head"><h2>Why Covid is the best case for our question</h2></header>
