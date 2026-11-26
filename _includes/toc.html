@@ -12,7 +12,7 @@
     {% endfor %}
   </ol>
   {% else %}
-  {% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+  {% assign ch = nil %}{% if page.chapter %}{% assign ch = site.data.chapters | where: "id", page.chapter | first %}{% endif %}
   <ol>{% for s in ch.sections %}<li><a href="#{{ s.id }}" data-spy="{{ s.id }}"><b>{{ s.num }}</b>{{ s.title }}</a></li>{% endfor %}</ol>
   {% endif %}
 </nav>

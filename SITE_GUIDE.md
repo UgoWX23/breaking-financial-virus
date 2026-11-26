@@ -31,6 +31,7 @@ Pour modifier un texte, on modifie donc le fichier de `_includes/story/`, et la 
 | `_data/ads.yml` | Les fausses pubs ADA |
 | `_data/ticker.yml` | Le bandeau des cours avec mini-courbes (valeurs factices, à générer depuis le notebook) |
 | `_data/annex.yml` | Les pages de l'onglet « More » |
+| `_data/team.yml` | Les membres et leur contribution (page Team) |
 | `_layouts/home.html`, `_layouts/default.html` | Mise en page de la Home et des pages de partie |
 
 **Ajouter une sous-partie** : l'ajouter dans `_includes/story/<partie>.html` (avec `section.html`) **et** dans `sections:` de la partie dans `_data/chapters.yml`, avec le même `id`. Les `id` doivent être uniques sur tout le site, car la Home contient toutes les parties.

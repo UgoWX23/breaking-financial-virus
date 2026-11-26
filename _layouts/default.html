@@ -7,7 +7,7 @@
 {% include header.html %}
 {% assign cur = 0 %}
 {% for c in site.data.chapters %}{% if c.id == page.chapter %}{% assign cur = forloop.index %}{% endif %}{% endfor %}
-{% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+{% assign ch = nil %}{% if page.chapter %}{% assign ch = site.data.chapters | where: "id", page.chapter | first %}{% endif %}
 <main id="top" class="wrap page">
   <div class="article">
     {% if ch %}

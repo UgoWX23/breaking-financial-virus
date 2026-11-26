@@ -1,7 +1,7 @@
 {% comment %} Right column: table of contents, ad, popular. all="yes" on the home page. {% endcomment %}
 <aside class="side">
   <div class="side-sticky">
-    {% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+    {% assign ch = nil %}{% if page.chapter %}{% assign ch = site.data.chapters | where: "id", page.chapter | first %}{% endif %}
     {% assign nsec = ch.sections | size %}
     {% if include.all or nsec > 0 %}{% include toc.html all=include.all %}{% endif %}
     <div class="side-ad">

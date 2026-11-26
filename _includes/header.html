@@ -1,5 +1,5 @@
 {% comment %} Top of every page: brand, tabs with hover menus, breaking band, market strip, banner ad. {% endcomment %}
-{% assign chap = site.data.chapters | where: "id", page.chapter | first %}
+{% assign chap = nil %}{% if page.chapter %}{% assign chap = site.data.chapters | where: "id", page.chapter | first %}{% endif %}
 {% assign in_annex = false %}
 {% for a in site.data.annex %}{% if page.url == a.url %}{% assign in_annex = true %}{% endif %}{% endfor %}
 <header class="masthead">
@@ -31,7 +31,6 @@
           <ul>{% for a in site.data.annex %}<li><a href="{{ a.url | relative_url }}">{{ a.title }}</a></li>{% endfor %}</ul>
         </div>
       </div>
-      {% for a in site.data.annex %}<a class="tab tab-mobile{% if page.url == a.url %} is-on{% endif %}" href="{{ a.url | relative_url }}">{{ a.title }}</a>{% endfor %}
     </div>
   </nav>
   <div class="breaking">

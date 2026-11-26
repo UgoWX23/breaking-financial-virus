@@ -3,14 +3,21 @@ layout: default
 permalink: /team/
 kicker: "Annex"
 title: "The newsroom"
+lead: "Five students of the Applied Data Analysis course at EPFL, fall 2026, behind the coverage."
 breaking: "Meet the team behind the coverage"
 ---
 
-ADA project, EPFL, fall 2026. Code and notebook: [GitHub repository](https://github.com/UgoWX23/breaking-financial-virus).
+<div class="team">
+  {% for member in site.data.team %}
+  {% assign parts = member.name | split: " " %}
+  {% assign ini1 = parts | first | slice: 0 %}
+  {% assign ini2 = parts | last | slice: 0 %}
+  <div class="member">
+    <span class="avatar" aria-hidden="true">{{ ini1 }}{{ ini2 }}</span>
+    <p class="member-name">{{ member.name }}</p>
+    <p class="member-role">{% if member.role and member.role != "" %}{{ member.role }}{% else %}Contribution to fill in <code>_data/team.yml</code>{% endif %}</p>
+  </div>
+  {% endfor %}
+</div>
 
-<div class="todo"><p class="step-label">To do for the team</p><p>One line per member with their real contribution, as required by the milestone.</p></div>
-
-- **Member 1**: contribution
-- **Member 2**: contribution
-- **Member 3**: contribution
-- **Member 4**: contribution
+<p class="prose">Code and notebook: <a href="https://github.com/UgoWX23/breaking-financial-virus">GitHub repository</a>.</p>
