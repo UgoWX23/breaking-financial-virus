@@ -1,0 +1,118 @@
+{% capture c21_m %}
+A rule written **before** looking: each sector gets a score from (1) an early onset, (2) a high share of stocks hit, (3) enough stocks, at least 100, and (4) a marked drawdown. We keep **one sector of origin** (the earliest) and **one control sector** (a defensive one) to compare.
+{% endcapture %}
+{% capture c21_r %}
+*To fill in.* The sector picked by the rule, and the control.
+{% endcapture %}
+{% capture c21_l %}
+If the rule picks a counter-intuitive sector, we keep it: it is what we announced.
+{% endcapture %}
+{% include section.html id="scope" num="2.1" title="Where we look" question="Which sectors do we study, without picking them by hand?" measure=c21_m figs="F2.1a" read=c21_r read_label="Result" limit=c21_l %}
+
+{% capture c22_m %}
+On 16 March 2020, almost everything fell at once. That is not contagion, that is the market. So we work on **residual returns** (what the market does not explain), and a **shock** is a residual below -3 standard deviations on a day **without** a market-wide fall.
+{% endcapture %}
+{% capture c22_r %}
+Most raw shocks happened on days when the whole market fell. Of 12,788 raw shocks in Covid, the filter removes 8,923 (70%) and leaves 3,865, of which 2,551 come from stocks. **This is already a clue**: the bulk of the crash hit every stock on the same days.
+
+| Sector | Stocks | Raw shocks | Kept | Removed |
+|---|--:|--:|--:|--:|
+| Real Estate | 210 | 671 | 90 | 87% |
+| Materials | 143 | 209 | 41 | 80% |
+| Utilities | 73 | 190 | 43 | 77% |
+| Financials | 939 | 2,608 | 670 | 74% |
+| Consumer Staples | 136 | 185 | 56 | 70% |
+| Energy | 205 | 396 | 144 | 64% |
+| Consumer Discretionary | 302 | 511 | 188 | 63% |
+| Industrials | 377 | 518 | 206 | 60% |
+| Communication Services | 126 | 144 | 58 | 60% |
+| Health Care | 549 | 397 | 185 | 53% |
+| Information Technology | 368 | 321 | 164 | 49% |
+{% endcapture %}
+{% capture c22_l %}
+Small sectors keep few shocks (41 in Materials, 43 in Utilities): estimates there will be noisy, so we pool them into the cyclical and defensive groups.
+{% endcapture %}
+{% include section.html id="market" num="2.2" title="First, remove the market" question="How many shocks are left once we take out the days when everything fell?" measure=c22_m method="market-model" figs="F2.3a" read=c22_r read_label="What we already see (notebook, section 6.2)" limit=c22_l %}
+
+{% capture c23_m %}
+An **event study**: after each shock on stock A, we add up the abnormal returns of the other stocks over the next 10 days (CAR), and compare stocks of the same sector with stocks of other sectors.
+
+<div class="diagram">
+<svg viewBox="0 0 640 120" role="img" aria-label="Calendar of an event study: estimation window from day -120 to day -20, shock at day 0, reaction window from day +1 to day +10">
+  <line x1="10" y1="80" x2="630" y2="80" stroke="#1b1d21" stroke-width="1.5"/>
+  <rect x="40" y="38" width="330" height="34" rx="4" fill="#e6effb" stroke="#257de0"/>
+  <text x="205" y="53" text-anchor="middle" font-size="12" fill="#1b1d21">estimation window [-120, -20]</text>
+  <text x="205" y="67" text-anchor="middle" font-size="11" fill="#5d636c">market model: alpha, beta</text>
+  <line x1="470" y1="22" x2="470" y2="90" stroke="#d0021b" stroke-width="2.5"/>
+  <text x="470" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#d0021b">day 0: shock on A</text>
+  <rect x="478" y="38" width="80" height="34" rx="4" fill="#eaf6ee" stroke="#0a7d32"/>
+  <text x="518" y="58" text-anchor="middle" font-size="11" fill="#1b1d21">[+1, +10]</text>
+  <text x="40" y="100" font-size="11" fill="#5d636c">-120</text><text x="355" y="100" font-size="11" fill="#5d636c">-20</text>
+  <text x="466" y="100" font-size="11" fill="#5d636c">0</text><text x="548" y="100" font-size="11" fill="#5d636c">+10</text>
+  <text x="518" y="114" text-anchor="middle" font-size="11" fill="#0a7d32">CAR of the neighbours</text>
+</svg>
+<p class="diagram-cap">Market-wide crash days are left out of the estimation window.</p>
+</div>
+{% endcapture %}
+{% capture c23_r %}
+*Expected, given what we see so far.* The two curves of F2.3b, same sector and other sectors, are probably very close. If they are, we say it plainly: we expected a sector contagion, and we do not detect a significant one with this data.
+{% endcapture %}
+{% capture c23_l %}
+Close curves can mean no contagion, or a contagion too fast to see with daily prices (within the same day). We cannot tell the two apart with this data.
+{% endcapture %}
+{% capture c23_d %}
+The typical lag between two stocks, on one example pair (F2.3d).
+{% endcapture %}
+{% include section.html id="neighbours" num="2.3" title="Do neighbours react?" question="After a shock on one stock, do stocks of the same sector fall more than the others?" measure=c23_m method="event-study" figs="F2.3b,F2.3c" read=c23_r read_label="What we expect to read" limit=c23_l deeper=c23_d deeper_figs="F2.3d" %}
+
+{% include ad.html n="7" %}
+
+{% capture c24_m %}
+For each pair of stocks, a lead-lag test: does the past of A help predict B? All pairs are tested, with **Benjamini-Hochberg** to control false positives. Significant links become arrows of a directed network, analysed with out-degree and PageRank.
+{% endcapture %}
+{% capture c24_r %}
+*Expected.* If contagion stays inside sectors, the network forms clusters of one colour. If links cross sectors at random, F2.4c will show it: its diagonal will not stand out.
+{% endcapture %}
+{% capture c24_l %}
+A link means "precedes", not "causes". We write "precursor stocks", never "responsible stocks".
+{% endcapture %}
+{% include section.html id="network" num="2.4" title="Who leads whom?" question="Do the links between stocks form sector clusters?" measure=c24_m method="granger,network" figs="F2.4a,F2.4b,F2.4c" read=c24_r read_label="What we expect to read" limit=c24_l %}
+
+{% capture c25_m %}
+**Size proxy**: mean dollar volume (Close x Volume) over the year before the crisis, split into three groups: small, medium, large.
+{% endcapture %}
+{% capture c25_r %}
+*Expected.* Three reasons can explain a high out-degree: the stock is big, liquid, or fragile. Crossing with volatility helps tell them apart.
+{% endcapture %}
+{% include section.html id="size" num="2.5" title="Do big firms trigger more?" question="Are the stocks that lead others the largest ones?" measure=c25_m method="event-study,network" figs="F2.2a,F2.2b" read=c25_r read_label="What we expect to read" %}
+
+{% capture c26_m %}
+Volume **z-score** against the 60-day mean, for the neighbours of the stock hit by a shock.
+{% endcapture %}
+{% capture c26_r %}
+*Expected.* If volume moves before price, it is an early signal of attention. Otherwise, the two move together.
+{% endcapture %}
+{% include section.html id="volume" num="2.6" title="Does trading explode around a shock?" question="Does the volume of neighbours rise before, or with, their price?" measure=c26_m method="event-study" figs="F2.5a,F2.5b" read=c26_r read_label="What we expect to read" %}
+
+{% capture c27_m %}
+We shuffle the sector labels 1,000 times, keeping sector sizes, and recompute the "same sector minus other sectors" effect each time. This shows what the effect looks like **by chance**.
+{% endcapture %}
+{% capture c27_r %}
+*Expected.* If the observed value (vertical line) falls in the middle of the histogram, the same-sector effect is no bigger than chance. That is the key figure of a null result: it shows we looked, and how.
+{% endcapture %}
+{% capture c27_d %}
+Does the result change with the threshold (k = 2, 3, 4), or if we do not remove the market (F2.6b)?
+{% endcapture %}
+{% include section.html id="chance" num="2.7" title="Could it be chance?" question="Is the gap between same sector and other sectors larger than what shuffled labels give?" measure=c27_m method="permutation" figs="F2.6a" read=c27_r read_label="What we expect to read" deeper=c27_d deeper_figs="F2.6b" %}
+
+<section class="sub" id="verdict">
+  <div class="verdict">
+    <p class="kicker">Our verdict, to confirm with F2.3b and F2.6a</p>
+    <h3>A common shock, not a chain reaction</h3>
+    <p>At the scale of single stocks, we do not see the crash travelling from one stock to its neighbours. Most shocks happened on the same days for everyone, and what is left after removing the market looks no stronger inside a sector than across sectors. Contagion may exist at a faster speed than daily prices can show, but with this data it is not visible stock by stock. So we step back.</p>
+  </div>
+  {% capture plan_b %}
+Keep this structure if the result is null: the title stays a question, F2.3b shows two curves on top of each other, and F2.6a puts the observed value in the middle of the histogram. If, on the contrary, the tests show an effect, rewrite this verdict and the chapter lead.
+{% endcapture %}
+  <div class="todo"><p class="step-label">To do for the team</p>{{ plan_b | markdownify }}</div>
+</section>

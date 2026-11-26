@@ -1,7 +1,11 @@
-<div class="ad {{ include.ad.theme }}{% if include.wide %} ad-wide{% endif %}">
-  <p class="ad-label">Commercial break (fictional ad)</p>
-  <p class="ad-title">{{ include.ad.title }}</p>
-  <p class="ad-body">{{ include.ad.body }}</p>
-  <span class="ad-btn">{{ include.ad.button }}</span>
-  <p class="ad-small">{{ include.ad.small }}</p>
+<div class="ad {{ include.ad.theme }}{% if include.banner %} ad-banner{% endif %}">
+  <div class="ad-text">
+    <p class="ad-label">Fictional ad</p>
+    <p class="ad-title">{{ include.ad.title }}</p>
+    <p class="ad-body">{{ include.ad.body }}</p>
+  </div>
+  <div class="ad-cta">
+    <span class="ad-btn">{{ include.ad.button }}</span>
+    <p class="ad-small">{{ include.ad.small }}</p>
+  </div>
 </div>

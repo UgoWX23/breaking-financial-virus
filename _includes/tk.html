@@ -1,0 +1,1 @@
+{% assign tk = site.data.ticker | where: "name", include.name | first %}{% if tk %}<span class="tkb"><b>{{ include.label | default: tk.name }}</b><i class="{% if tk.change < 0 %}down{% else %}up{% endif %}">{% if tk.change > 0 %}+{% endif %}{{ tk.change }}%</i></span>{% endif %}

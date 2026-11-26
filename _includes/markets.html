@@ -1,0 +1,31 @@
+{% comment %} Yahoo-style market strip: name, level, change and a sparkline per entry of _data/ticker.yml. {% endcomment %}
+<div class="markets">
+  <div class="wrap markets-inner">
+    <p class="markets-label"><span class="pulse" aria-hidden="true"></span>Crash desk<small>Peak to trough, 2020</small></p>
+    <div class="markets-scroll" tabindex="0" aria-label="Indices during the Covid crash (placeholder values)">
+      {% for t in site.data.ticker %}
+      {% assign sp = t.spark | sort %}
+      {% assign lo = sp | first %}
+      {% assign hi = sp | last %}
+      {% assign rng = hi | minus: lo %}
+      {% if rng == 0 %}{% assign rng = 1 %}{% endif %}
+      {% assign np = t.spark | size | minus: 1 %}
+      {% if np < 1 %}{% assign np = 1 %}{% endif %}
+      {% assign pts = "" %}
+      {% for v in t.spark %}
+        {% assign px = forloop.index0 | times: 80.0 | divided_by: np %}
+        {% assign py = hi | minus: v | times: 26.0 | divided_by: rng | plus: 2 %}
+        {% capture pt %}{{ px | round: 1 }},{{ py | round: 1 }} {% endcapture %}
+        {% assign pts = pts | append: pt %}
+      {% endfor %}
+      <div class="mk">
+        <span class="mk-name">{{ t.name }}</span>
+        <span class="mk-val">{{ t.value }}</span>
+        <span class="mk-chg {% if t.change < 0 %}down{% else %}up{% endif %}">{% if t.change > 0 %}+{% endif %}{{ t.change }}%</span>
+        <svg class="mk-spark {% if t.change < 0 %}down{% else %}up{% endif %}" viewBox="0 0 80 30" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="2" x2="80" y2="2" class="mk-base"/><polyline points="{{ pts | strip }}"/></svg>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="mk-arrow" type="button" data-scroll="1" aria-label="More indices">&#8250;</button>
+  </div>
+</div>

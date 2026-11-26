@@ -1,0 +1,75 @@
+{% capture warn_old %}
+The dataset only contains firms still listed in 2020. For the dot-com bubble, many firms that disappeared are **absent**: results for 2000-2002 lean towards the survivors and are probably too optimistic. We repeat this under every figure concerned.
+{% endcapture %}
+{% include callout.html kind="warn" title="A caution on the older crises" body=warn_old %}
+
+{% capture c11_m %}
+- **Onset of a stock**: first day its market-adjusted return (or its abnormal volume) goes beyond k times its pre-crisis volatility. k is a parameter, not a truth.
+- **Share hit** per sector and per day: the share of the sector's stocks that have reached their onset.
+- **Onset of a sector**: the day that share reaches 10% (start), 50% (middle) and 90% (end).
+- **Threshold check**: the same computation for k = 2, 3, 4, and the Kendall rank correlation between the orders obtained.
+{% endcapture %}
+{% capture c11_r %}
+*Expected, to replace with the result.* The sector of origin probably differs from one crisis to the next: technology in 2000, finance in 2008. If the order of sectors changes a lot with k, we say so: the onset is then a fragile result, and the following figures must be read with caution.
+{% endcapture %}
+{% capture c11_l %}
+The threshold is a choice. F1.1e is there to show it, not to hide it. And knowing who falls first does not say who suffers the most.
+{% endcapture %}
+{% capture c11_d %}
+How much of each sector is hit after 10 and 30 days (F1.1c), and the full distribution of onset dates (F1.1d).
+{% endcapture %}
+{% include section.html id="onset" num="1.1" title="Who falls first?" question="Which stocks are hit when the crisis starts, and is there a pattern by sector?" measure=c11_m method="onset" figs="F1.1a,F1.1b,F1.1e" read=c11_r read_label="What we expect to read" limit=c11_l next_text="What is left after the crisis?" next_href="#drawdown" deeper=c11_d deeper_figs="F1.1c,F1.1d" %}
+
+{% capture c12_m %}
+- **Drawdown** of a sector: the gap between its equal-weighted index and its previous peak.
+- **Maximum drawdown**: the deepest point of that gap.
+- **Recovery time**: days needed to recover half of the maximum loss.
+{% endcapture %}
+{% capture c12_r %}
+*Expected.* The sectors hit hardest are not necessarily the first to fall: compare F1.1b with F1.2b. A first look at the stocks: median worst drawdown about -65% in 2008 and about -42% in Covid, reached in only 23 trading days.
+{% endcapture %}
+{% capture c12_l %}
+Survivorship bias: a firm that disappeared during the crisis is not in the data, so the drawdown is underestimated, above all for the dot-com and 2008. Some sectors are supposed to resist better. Is it always true?
+{% endcapture %}
+{% include section.html id="drawdown" num="1.2" title="The aftermath: how much did each sector lose?" question="What is left of each sector once the crisis is over?" measure=c12_m method="drawdown" figs="F1.2a,F1.2b,F1.2c" read=c12_r read_label="What we expect to read" limit=c12_l next_text="Do defensive sectors really resist?" next_href="#defensive" %}
+
+{% include ad.html n="3" %}
+
+{% capture c13_m %}
+- **Defensive or cyclical**, from the sector table, fixed before looking at the results: Health Care, Consumer Staples and Utilities are defensive.
+- For each crisis: an equal-weighted defensive index, a cyclical index, and the **ratio of their drawdowns**, with a bootstrap interval over stocks.
+{% endcapture %}
+{% capture c13_r %}
+*Expected.* A ratio below 1 means defensive stocks held up better. If the ratio changes a lot from one crisis to the next, "defensive" is not a stable property. If 2020 shows the opposite of what we expect, it is a result worth developing.
+{% endcapture %}
+{% capture c13_l %}
+The defensive and cyclical split is itself a choice, and we say it. To compare crises on more than prices, we need to choose the right measures.
+{% endcapture %}
+{% include section.html id="defensive" num="1.3" bonus="yes" title="Do defensive sectors always hold up?" question="Health care, staples and utilities are supposed to resist crises. Do they?" measure=c13_m method="defensive" figs="F1.3a,F1.3b" read=c13_r read_label="What we expect to read" limit=c13_l next_text="Which measures describe a crisis?" next_href="#pca" %}
+
+{% capture c14_m %}
+Two separate PCAs:
+
+- **PCA of the features** (stock x feature, one per crisis): which features count, and are they the same from one crisis to the next?
+- **PCA of the returns** (date x stock): how much does the market explain (PC1), and then each sector?
+
+| Feature | What it captures | Kept? |
+|---|---|---|
+| Cumulative return, maximum drawdown | Size of the loss | to validate |
+| 20-day volatility, crisis / pre-crisis ratio | Strength of the stress | to validate |
+| Open-to-close return | Direction of the session | to validate |
+| Overnight gap | News arriving outside trading hours | to validate |
+| Intraday range | Nervousness of the session | to validate |
+| Volume z-score | Investor attention | to validate |
+| Illiquidity | Price impact per dollar traded | to validate |
+{% endcapture %}
+{% capture c14_r %}
+*Expected.* The features kept at the end of this section are the ones used everywhere else on the site (chapter 2, chapter 3, clustering). **We fix them here**, which gives the rest of the story its logic.
+{% endcapture %}
+{% capture c14_l %}
+If the patterns do not generalise from one crisis to the next, that is an honest result: we present it as such, and it justifies zooming in on a single crisis.
+{% endcapture %}
+{% capture c14_d %}
+Learned on two crises, tested on the third: does the structure carry over?
+{% endcapture %}
+{% include section.html id="pca" num="1.4" title="Which measures describe a crisis?" question="How much weight does each sector carry in price moves, and which features should we look at?" measure=c14_m method="pca" figs="F1.4a,F1.4b,F1.4c,F1.4d" read=c14_r read_label="What we expect to read" limit=c14_l deeper=c14_d deeper_figs="F1.4e" %}

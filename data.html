@@ -1,0 +1,63 @@
+---
+layout: default
+permalink: /data/
+kicker: "Annex"
+title: "Data and limits"
+lead: "From the raw downloads to the tables behind every figure: where each source comes from, what we did to it, and what is known to be wrong."
+breaking: "From the download to the figures"
+---
+
+<div class="flow">
+  <div class="flow-col">
+    <h3>Sources</h3>
+    <div class="src"><b>Kaggle stock market dataset</b><span>One CSV per stock or ETF listed in the US, up to 1 April 2020. 8,049 files: 5,884 stocks and 2,165 ETFs. 33 files with a zero or negative <code>Adj Close</code> are left out.</span></div>
+    <div class="src"><b>Yahoo Finance (yfinance)</b><span>History from April 2020 to 30 October 2026, with dividends, for 5,277 of the 8,049 tickers. Frozen on the download of 1 and 2 November 2026.</span></div>
+    <div class="src"><b>Sector table</b><span>Yahoo labels mapped to the 11 GICS sectors, plus defensive and cyclical groups. Not official GICS labels.</span></div>
+    <div class="src"><b>Regional ETFs</b><span>26 funds mapped by hand to a region. 12 usable for the dot-com, 20 for 2008, 25 for Covid.</span></div>
+    <div class="src missing"><b>Epidemic data (to add)</b><span>Case counts by country, for example Our World in Data or Johns Hopkins.</span></div>
+  </div>
+  <div class="flow-col">
+    <h3>Processing</h3>
+    <div class="proc">
+      <b>Preparation, ticker by ticker</b>
+      <ul>
+        <li>Correction of <code>Adj Close</code>: when the <code>Close</code> and <code>Adj Close</code> returns differ by more than 5 points, keep the one closest to zero (7,201 days, 0.026% of returns).</li>
+        <li>Joining Kaggle and Yahoo through returns and splits.</li>
+        <li>Log returns, ticker x date panel.</li>
+        <li>Residual returns from a market model.</li>
+        <li>Minimal history filter.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flow-col">
+    <h3>Products</h3>
+    <div class="prod">Features per stock and crisis</div>
+    <div class="prod">Table of onsets</div>
+    <div class="prod">Shock events (residual below -3 sigma)</div>
+    <div class="prod">Lead-lag network</div>
+    <div class="prod">Sector and regional indices</div>
+  </div>
+</div>
+
+<section class="sub">
+  <header class="sub-head"><h2>How many stocks we can use</h2></header>
+  <table>
+    <thead><tr><th>Crisis</th><th class="num">Tickers</th><th class="num">Included</th><th class="num">Inclusion rate</th><th class="num">Trading days</th></tr></thead>
+    <tbody>
+      <tr><td>Dot-com (2000-2002)</td><td class="num">2,645</td><td class="num">1,603</td><td class="num">61%</td><td class="num">648</td></tr>
+      <tr><td>2008 financial crisis</td><td class="num">4,098</td><td class="num">2,739</td><td class="num">67%</td><td class="num">356</td></tr>
+      <tr><td>Covid (2020)</td><td class="num">8,012</td><td class="num">6,506</td><td class="num">81%</td><td class="num">24</td></tr>
+    </tbody>
+  </table>
+  <p class="prose">A ticker is excluded when it lacks history before the crisis (the market model cannot be estimated), has too many gaps during it, or trades below 1 dollar.</p>
+</section>
+
+<section class="sub">
+  <header class="sub-head"><h2>Known problems</h2></header>
+  <ul class="prose">
+    <li><b>Survivorship bias.</b> Only firms listed in 2020 are present: the dot-com and 2008 are seen through survivors, Covid is almost complete.</li>
+    <li><b>Yahoo extension.</b> 42% of tickers keep their Kaggle history only (delisted, merged, ticker reused by another firm, or a failed check). This affects the recovery period, not the crisis windows.</li>
+    <li><b>Adjusted prices.</b> The correction rule can shrink a real large move on rare days, and the checks do not catch every error.</li>
+    <li><b>Sectors.</b> 28% of the Covid stocks have no label.</li>
+  </ul>
+</section>

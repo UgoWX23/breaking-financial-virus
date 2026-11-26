@@ -1,0 +1,94 @@
+# The story, in reading order. One entry per part.
+# Drives: the tabs and their hover menus, the chapter headers (on the part pages and on the home page),
+# the table of contents on the right, the breaking band and the "Up next" card.
+# sections: the sub-sections of the part; each id must match the id given to section.html in _includes/story/.
+- id: context
+  tab: "Context"
+  short: "Context"
+  kicker: "Start here"
+  title: "How a virus became a market crash"
+  lead: "The Covid crash is a rare natural experiment: a shock that came from outside the financial system, with a known calendar, and that spread across countries in a few weeks. Every chart on this site refers to these dates."
+  url: /contexte/
+  story: context
+  breaking: "From a cluster in Wuhan to the fastest crash on record"
+  bridge_in: ""
+  sections: []
+- id: intro
+  tab: "Intro & data"
+  short: "Intro and data"
+  kicker: "Intro"
+  title: "Where the data comes from"
+  lead: "A financial crisis is usually told with one date and one percentage. Yet stocks do not all fall on the same day, nor in the same way. To follow the path of a crisis, we used the daily prices and volumes of thousands of stocks and ETFs listed in the United States. Before the results, here is where the data comes from, and what it cannot tell us."
+  url: /intro/
+  breaking: "Special coverage: how a crash travels through thousands of stocks"
+  bridge_in: "Before the results: where does the data come from, and what can it not tell us?"
+  sections:
+    - {id: wave, num: "0.1", title: "The Covid wave"}
+    - {id: why-data, num: "0.2", title: "Why this data"}
+    - {id: sectors-legend, num: "0.3", title: "Eleven sectors, eleven colours"}
+    - {id: limits, num: "0.4", title: "What the data cannot tell"}
+- id: crises
+  tab: "RQ1: Crisis analysis"
+  short: "RQ1: Crisis analysis"
+  kicker: "RQ1"
+  title: "How crises hit stocks, and where each one starts"
+  lead: "Three crises, three very different shapes: the dot-com bubble deflated over 648 trading days, 2008 over 356, Covid in 24. Before following one crisis up close, we compare them: who falls first, who loses the most, and which measures describe a crisis best."
+  question: "Which sectors fall first, and do crises differ from one another?"
+  url: /crises/
+  breaking: "Three crises, one question: who falls first?"
+  bridge_in: "Before following one crisis, a question: are they all alike?"
+  sections:
+    - {id: onset, num: "1.1", title: "Who falls first"}
+    - {id: drawdown, num: "1.2", title: "The aftermath"}
+    - {id: defensive, num: "1.3", title: "Defensive sectors"}
+    - {id: pca, num: "1.4", title: "The right measures"}
+- id: contagion
+  tab: "RQ2: Stock to stock"
+  short: "RQ2: Stock to stock"
+  kicker: "RQ2"
+  title: "Does a shock jump from one stock to the next?"
+  lead: "We now zoom in on Covid and look at single stocks. If one stock suddenly falls, do its neighbours in the same sector follow, more than the rest of the market? We looked hard. The honest answer may well be: not visibly. Here is how we searched, and why a null result still tells us something."
+  question: "Do shocks spread from stock to stock within a sector, more than across sectors?"
+  url: /contagion/
+  breaking: "Zoom on Covid: does one stock drag its neighbours down?"
+  bridge_in: "To follow the spread up close, we pick Covid: the only case where we know the virus's timeline, region by region."
+  sections:
+    - {id: scope, num: "2.1", title: "Where we look"}
+    - {id: market, num: "2.2", title: "Remove the market"}
+    - {id: neighbours, num: "2.3", title: "Do neighbours react?"}
+    - {id: network, num: "2.4", title: "Who leads?"}
+    - {id: size, num: "2.5", title: "Big or small"}
+    - {id: volume, num: "2.6", title: "Volume"}
+    - {id: chance, num: "2.7", title: "Is it chance?"}
+    - {id: verdict, num: "2.8", title: "Verdict"}
+- id: sectors
+  tab: "RQ3: Sectors"
+  short: "RQ3: Sectors and regions"
+  kicker: "RQ3"
+  title: "Sector to sector, then region to region"
+  lead: "Stock by stock, the contagion was hard to see. Grouped by sector, the picture changes: sectors do not all fall at once. Some start early, some fall hardest, some recover first. Then we zoom out once more, to regions, and set the crash next to the epidemic."
+  question: "In which order are sectors and regions hit, and did markets follow the virus?"
+  url: /sectors/
+  breaking: "Zooming out: sectors, then regions, against the epidemic"
+  bridge_in: "Stock by stock, the contagion is hard to see. Let's step back: what if we group stocks by sector?"
+  sections:
+    - {id: metrics, num: "3.1", title: "Four words"}
+    - {id: order, num: "3.2", title: "The order of sectors"}
+    - {id: typology, num: "3.3", title: "Defensive or cyclical"}
+    - {id: etfs, num: "3.4", title: "Regional ETFs"}
+    - {id: map, num: "3.5", title: "The two timelines"}
+    - {id: alignment, num: "3.6", title: "Before or after the virus?"}
+    - {id: together, num: "3.7", title: "Regions moving together"}
+- id: conclusion
+  tab: "Conclusion"
+  short: "Conclusion"
+  kicker: "Conclusion"
+  title: "Are sectors the right groups?"
+  lead: "From the start, we grouped stocks by their official sector. But in a crash, stocks of the same sector may behave very differently, and stocks of different sectors alike. Here we let the data form its own groups, then replay the whole zoom: stock, sector, region."
+  url: /conclusion/
+  breaking: "What we can say, and what we cannot"
+  bridge_in: "We used the official sectors from the start. Are they the right groups?"
+  sections:
+    - {id: clusters, num: "4.1", title: "Data clusters"}
+    - {id: big-graph, num: "4.2", title: "The big graph"}
+    - {id: synthesis, num: "4.3", title: "What we can say"}

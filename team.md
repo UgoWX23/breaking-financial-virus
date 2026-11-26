@@ -1,14 +1,14 @@
 ---
 layout: default
-permalink: /equipe/
+permalink: /team/
+kicker: "Annex"
 title: "The newsroom"
-tag: "TEAM"
-date_story: "Nov 2026"
+breaking: "Meet the team behind the coverage"
 ---
 
 ADA project, EPFL, fall 2026. Code and notebook: [GitHub repository](https://github.com/UgoWX23/breaking-financial-virus).
 
-<p class="todo">One line per member with the real contribution, as required by the milestone (for example: data pipeline, plots, algorithm, writing the story).</p>
+<div class="todo"><p class="step-label">To do for the team</p><p>One line per member with their real contribution, as required by the milestone.</p></div>
 
 - **Member 1**: contribution
 - **Member 2**: contribution

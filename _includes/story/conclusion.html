@@ -1,0 +1,41 @@
+{% capture c51_m %}
+**k-means** and **hierarchical clustering** on the features fixed in 1.4, then comparison with the GICS sectors using the adjusted Rand index (ARI) and normalised mutual information (NMI). Both are computed **in a calm period and in the crisis**: an ARI alone is hard to read, the comparison gives it meaning.
+{% endcapture %}
+{% capture c51_r %}
+*Expected.* If the agreement drops in the crisis, official sectors group stocks that react differently when things go wrong. The profile of each cluster (F4.1c) lets us name them, for example "fragile and illiquid".
+{% endcapture %}
+{% include section.html id="clusters" num="4.1" title="What groups does the data find?" question="Do clusters built from crisis behaviour match the official sectors?" measure=c51_m method="clustering" figs="F4.1a,F4.1b,F4.1c" read=c51_r read_label="What we expect to read" %}
+
+{% capture c52_m %}
+Every stock as a node, links from the lead-lag tests, colours from the sectors or from the clusters.
+{% endcapture %}
+{% include section.html id="big-graph" num="4.2" title="The whole market as one network" question="What does the market look like when every stock is drawn?" measure=c52_m method="network" figs="F4.2" wide="yes" %}
+
+<section class="sub" id="synthesis">
+  <header class="sub-head">
+    <p class="sub-num">4.3</p>
+    <h2>The zoom, replayed</h2>
+    <p class="sub-q">One answer per scale, then what remains to study.</p>
+  </header>
+  {% include figure.html id="F5.1" %}
+  <div class="cando">
+    <div class="yes">
+      <h3>What we can say</h3>
+      <ul>
+        <li><b>Stock:</b> to fill in. Expected: no visible contagion stock to stock; a common shock dominates.</li>
+        <li><b>Sector:</b> to fill in with the order and the four metrics.</li>
+        <li><b>Region:</b> to fill in with the alignment between market and epidemic.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>What we cannot say</h3>
+      <ul>
+        <li>Anything about causes: lead-lag is an association.</li>
+        <li>That our findings hold for every crisis: we compare three.</li>
+        <li>Exact depths for 2000 and 2008: survivorship bias, twice.</li>
+        <li>Fine regional conclusions: few regional ETFs, wide intervals.</li>
+        <li>Results free of our choices: thresholds were chosen, and we show their effect.</li>
+      </ul>
+    </div>
+  </div>
+</section>

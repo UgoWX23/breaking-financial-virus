@@ -1,0 +1,14 @@
+{% comment %} One figure, or several behind tabs. ids: comma-separated figure ids. {% endcomment %}
+{% assign list = include.ids | split: "," %}
+{% assign count = list | size %}
+{% if count > 1 %}
+<div class="figtabs">
+  <div class="figtabs-bar" role="tablist">
+    {% for raw in list %}{% assign fid = raw | strip %}{% assign tf = site.data.figures | where: "id", fid | first %}<button type="button" role="tab" class="figtab{% if forloop.first %} is-on{% endif %}" data-tab="{{ fid | slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"><b>{{ fid }}</b> {{ tf.title }}</button>{% endfor %}
+  </div>
+  {% for raw in list %}{% assign fid = raw | strip %}<div class="figpanel{% if forloop.first %} is-on{% endif %}" data-panel="{{ fid | slugify }}" role="tabpanel">{% include figure.html id=fid %}</div>{% endfor %}
+</div>
+{% else %}
+{% assign fid = list | first | strip %}
+{% include figure.html id=fid %}
+{% endif %}

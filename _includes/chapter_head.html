@@ -1,0 +1,9 @@
+{% comment %} Header of one part. id: chapter id. level: h1 (part page) or h2 (home page). {% endcomment %}
+{% assign ch = site.data.chapters | where: "id", include.id | first %}
+<header class="hero{% if include.level == 'h2' %} hero-in-story{% endif %}" id="ch-{{ ch.id }}">
+  <p class="kicker">{{ ch.kicker }}</p>
+  {% if include.level == 'h2' %}<h2 class="hero-title"><a href="{{ ch.url | relative_url }}">{{ ch.title }}</a></h2>{% else %}<h1 class="hero-title">{{ ch.title }}</h1>{% endif %}
+  <p class="byline">By the Financial Virus desk. Covid crash, 19 February to 23 March 2020.</p>
+  {% if ch.lead %}<p class="lead">{{ ch.lead }}</p>{% endif %}
+  {% if ch.question %}<p class="big-question"><span>The question</span>{{ ch.question }}</p>{% endif %}
+</header>

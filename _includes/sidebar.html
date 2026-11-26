@@ -1,0 +1,21 @@
+{% comment %} Right column: table of contents, ad, popular. all="yes" on the home page. {% endcomment %}
+<aside class="side">
+  <div class="side-sticky">
+    {% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+    {% assign nsec = ch.sections | size %}
+    {% if include.all or nsec > 0 %}{% include toc.html all=include.all %}{% endif %}
+    <div class="side-ad">
+      <div class="ad-rotor">{% for a in site.data.ads %}{% include ad_card.html ad=a %}{% endfor %}</div>
+    </div>
+    {% unless include.all %}
+    <div class="side-box">
+      <p class="side-title">Popular</p>
+      <ul class="pop">
+        {% for c in site.data.chapters %}{% if c.id != page.chapter %}
+        <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a><span class="pop-src">{{ c.short }}</span></li>
+        {% endif %}{% endfor %}
+      </ul>
+    </div>
+    {% endunless %}
+  </div>
+</aside>

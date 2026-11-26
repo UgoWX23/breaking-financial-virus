@@ -1,21 +1,11 @@
-theme: jekyll-theme-minimal
 title: "The Financial Virus: Live"
-description: "BREAKING: How the Covid-19 crash spread from stock to stock, sector to sector and region to region. A data story on financial contagion, February-March 2020."
-show_downloads: True
-navigation:
-  - title: Home
-    url: /
-  - title: Context
-    url: /contexte/
-  - title: Origin
-    url: /origine/
-  - title: Within sectors
-    url: /contagion/
-  - title: Across sectors
-    url: /sectors/
-  - title: Regions
-    url: /regions/
-  - title: Methods
-    url: /methodes/
-  - title: Team
-    url: /equipe/
+description: "How the Covid-19 crash spread across stocks, sectors and regions."
+
+# Files that stay on GitHub but are not part of the website
+exclude:
+  - README.md
+  - SITE_GUIDE.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor

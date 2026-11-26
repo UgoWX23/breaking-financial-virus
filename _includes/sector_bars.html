@@ -1,0 +1,15 @@
+{% comment %} F0.3: stocks per sector in the Covid window, and the sector colours used on the whole site. {% endcomment %}
+{% assign maxn = 0 %}
+{% for s in site.data.sectors %}{% if s.covid_n > maxn %}{% assign maxn = s.covid_n %}{% endif %}{% endfor %}
+{% assign sorted = site.data.sectors | sort: "covid_n" | reverse %}
+<div class="sbars" role="table" aria-label="Included stocks per sector, Covid window">
+  {% for s in sorted %}
+  {% assign w = s.covid_n | times: 100.0 | divided_by: maxn %}
+  <div class="sbar" role="row" title="{{ s.name }}: {{ s.covid_n }} stocks, {{ s.group }}">
+    <span class="sbar-name" role="cell"><i style="background:{{ s.color }}"></i>{{ s.name }}</span>
+    <span class="sbar-track" role="cell"><span class="sbar-fill" style="width:{{ w }}%;background:{{ s.color }}"></span></span>
+    <span class="sbar-n" role="cell">{{ s.covid_n }}</span>
+  </div>
+  {% endfor %}
+</div>
+<p class="sbars-note">Included stocks in the Covid window. 1,330 more stocks have no sector label and are left out of sector-level claims.</p>

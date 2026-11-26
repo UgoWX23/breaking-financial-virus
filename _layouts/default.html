@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+{% include head.html %}
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="{{ '/' | relative_url }}">The Financial Virus<span class="live">LIVE</span></a>
-    <nav class="menu">
-      {% for item in site.navigation %}
-        <a href="{{ item.url | prepend: '/' | replace: '//', '/' | relative_url }}">{{ item.title }}</a>
-      {% endfor %}
-    </nav>
-  </header>
-
-  <div class="breaking">
-    <span class="breaking-tag">BREAKING</span>
-    <span class="breaking-text">{{ page.breaking | default: site.description }}</span>
-  </div>
-
-  {% include ticker.html %}
-
-  <main class="wrap">
-    <article class="story">
-      {% if page.tag %}<p class="status">{{ page.tag }}</p>{% endif %}
-      {% if page.title %}<h1 class="headline">{{ page.title }}</h1>{% endif %}
-      {% if page.date_story %}<p class="stamp">Covid desk &middot; {{ page.date_story }}</p>{% endif %}
+{% include header.html %}
+{% assign cur = 0 %}
+{% for c in site.data.chapters %}{% if c.id == page.chapter %}{% assign cur = forloop.index %}{% endif %}{% endfor %}
+{% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+<main id="top" class="wrap page">
+  <div class="article">
+    {% if ch %}
+      {% include chapter_head.html id=page.chapter level="h1" %}
+    {% elsif page.title %}
+    <header class="hero">
+      {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+      <h1 class="hero-title">{{ page.title }}</h1>
+      {% if page.lead %}<p class="lead">{{ page.lead }}</p>{% endif %}
+    </header>
+    {% endif %}
+    {% assign nsec = ch.sections | size %}
+    {% if nsec > 0 %}
+    <details class="toc-mobile">
+      <summary>In this part</summary>
+      <ol>{% for s in ch.sections %}<li><a href="#{{ s.id }}"><b>{{ s.num }}</b> {{ s.title }}</a></li>{% endfor %}</ol>
+    </details>
+    {% endif %}
+    <div class="content">
       {{ content }}
-    </article>
-    <aside class="side">
-      {% include ad.html %}
-    </aside>
-  </main>
-
-  <footer class="foot">
-    ADA project, EPFL. Ads are fictional. Not financial advice.
-  </footer>
+    </div>
+    {% if cur > 0 %}{% include prevnext.html cur=cur %}{% endif %}
+  </div>
+  {% include sidebar.html %}
+</main>
+{% include footer.html %}
 </body>
 </html>

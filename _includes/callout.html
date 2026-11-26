@@ -1,0 +1,5 @@
+{% comment %} kind: warn | note | ok | danger. title: short. body: Markdown (capture it). {% endcomment %}
+<div class="callout callout-{{ include.kind | default: 'note' }}">
+  {% if include.title %}<p class="callout-title">{{ include.title }}</p>{% endif %}
+  {{ include.body | markdownify }}
+</div>

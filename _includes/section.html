@@ -1,0 +1,50 @@
+{% comment %}
+One sub-section, following the team template:
+measure (features) -> figure(s) -> read (explanation) -> open (limit + bridge), then "Go further".
+Parameters: id, num, title, question, measure, method, figs, read, read_label, limit,
+next_text, next_href, deeper, deeper_figs, todo, bonus, wide ("yes" puts the figure full width).
+measure, read, limit, deeper and todo are Markdown (use capture in the page).
+{% endcomment %}
+{% assign m = include.measure | strip %}
+{% assign r = include.read | strip %}
+{% assign l = include.limit | strip %}
+{% assign d = include.deeper | strip %}
+{% assign df = include.deeper_figs | strip %}
+{% assign td = include.todo | strip %}
+<section class="sub{% if include.wide %} sub-wide{% endif %}" id="{{ include.id }}">
+  <header class="sub-head">
+    <p class="sub-num">{{ include.num }}{% if include.bonus %}<span class="tag-bonus">Bonus</span>{% endif %}</p>
+    <h2>{{ include.title }}</h2>
+    {% if include.question %}<p class="sub-q">{{ include.question }}</p>{% endif %}
+  </header>
+  <div class="sub-grid">
+    <div class="sub-side">
+      {% if m != "" %}
+      <div class="step step-measure">
+        <p class="step-label">What we measure</p>
+        {{ m | markdownify }}
+        {% if include.method %}<p class="method-links">{% assign ms = include.method | split: "," %}{% for rawm in ms %}{% assign mid = rawm | strip %}{% assign mm = site.data.methods | where: "id", mid | first %}<a class="mchip" href="{{ '/methods/' | relative_url }}#{{ mid }}" target="_blank" rel="noopener" title="Opens the method sheet in a new tab"><span>Method</span>{{ mm.name | default: mid }}</a>{% endfor %}</p>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="sub-main">
+      {% if include.figs %}{% include figures.html ids=include.figs %}{% endif %}
+    </div>
+  </div>
+  {% if r != "" or l != "" %}
+  <div class="sub-out">
+    {% if r != "" %}<div class="step step-read"><p class="step-label">{{ include.read_label | default: "What we read" }}</p>{{ r | markdownify }}</div>{% endif %}
+    {% if l != "" %}<div class="step step-open"><p class="step-label">What remains open</p>{{ l | markdownify }}{% if include.next_text %}<p class="bridge"><a href="{{ include.next_href }}">{{ include.next_text }}</a></p>{% endif %}</div>{% endif %}
+  </div>
+  {% endif %}
+  {% if td != "" %}<div class="todo"><p class="step-label">To do for the team</p>{{ td | markdownify }}</div>{% endif %}
+  {% if d != "" or df != "" %}
+  <details class="deeper">
+    <summary>Go further: method, robustness, technical figures</summary>
+    <div class="deeper-body">
+      {% if d != "" %}{{ d | markdownify }}{% endif %}
+      {% if df != "" %}{% include figures.html ids=df %}{% endif %}
+    </div>
+  </details>
+  {% endif %}
+</section>

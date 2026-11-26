@@ -1,10 +1,16 @@
-<figure class="fig">
-  {% if include.src %}
-    <iframe src="{{ include.src | relative_url }}" loading="lazy" title="{{ include.caption }}"></iframe>
-  {% elsif include.img %}
-    <img src="{{ include.img | relative_url }}" alt="{{ include.caption }}">
+{% assign f = site.data.figures | where: "id", include.id | first %}
+<figure class="fig{% if include.compact %} fig-compact{% endif %}"{% if include.anchor != "no" %} id="fig-{{ include.id | slugify }}"{% endif %}>
+  {% if f.builtin == "sector_bars" %}
+    {% include sector_bars.html %}
+  {% elsif f.file and f.file != "" %}
+    <iframe src="{{ f.file | prepend: '/' | relative_url }}" loading="lazy" title="{{ f.title }}" style="height:{{ f.height | default: 460 }}px"></iframe>
   {% else %}
-    <div class="fig-todo"><b>Figure to come</b><span>{{ include.todo }}</span></div>
+    <div class="fig-todo" style="min-height:{{ f.height | default: 300 }}px">
+      <p class="fig-todo-id">{{ include.id }}{% if f.prio == "star" %} <span class="star" title="Indispensable">&#9733;</span>{% endif %}</p>
+      <p class="fig-todo-q">{{ f.question }}</p>
+      <p class="fig-todo-type">{{ f.type }}</p>
+      <p class="fig-todo-how">Export from the notebook to <code>assets/figures/{{ include.id | replace: ".", "_" }}.html</code>, then set <code>file:</code> in <code>_data/figures.yml</code>.</p>
+    </div>
   {% endif %}
-  <figcaption>{{ include.caption }}</figcaption>
+  <figcaption><b>{{ include.id }}.</b> {{ f.title }}</figcaption>
 </figure>

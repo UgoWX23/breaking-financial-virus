@@ -1,0 +1,11 @@
+{% assign i = include.cur | minus: 1 %}
+{% assign pi = i | minus: 1 %}
+{% assign ni = i | plus: 1 %}
+{% assign prev = nil %}{% assign next = nil %}
+{% if pi >= 0 %}{% assign prev = site.data.chapters[pi] %}{% endif %}
+{% assign n = site.data.chapters | size %}
+{% if ni < n %}{% assign next = site.data.chapters[ni] %}{% endif %}
+<section class="prevnext">
+  {% if next %}<a class="pn pn-next" href="{{ next.url | relative_url }}"><span class="pn-dir">Up next</span><span class="pn-title">{{ next.title }}</span><span class="pn-bridge">{{ next.bridge_in }}</span></a>{% endif %}
+  {% if prev %}<a class="pn pn-prev" href="{{ prev.url | relative_url }}"><span class="pn-dir">Previous</span><span class="pn-title">{{ prev.short }}</span></a>{% endif %}
+</section>

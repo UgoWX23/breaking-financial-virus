@@ -1,0 +1,18 @@
+{% comment %} Table of contents. all="yes": every part (home page); otherwise the current part only. {% endcomment %}
+<nav class="side-box toc" aria-label="Contents">
+  <p class="side-title">{% if include.all %}The whole story{% else %}In this part{% endif %}</p>
+  {% if include.all %}
+  <ol class="toc-chaps">
+    {% for c in site.data.chapters %}
+    <li class="toc-chap">
+      <a class="toc-chap-link" href="#ch-{{ c.id }}" data-spy="ch-{{ c.id }}">{{ c.short }}</a>
+      {% assign nsec = c.sections | size %}
+      {% if nsec > 0 %}<ol>{% for s in c.sections %}<li><a href="#{{ s.id }}" data-spy="{{ s.id }}"><b>{{ s.num }}</b>{{ s.title }}</a></li>{% endfor %}</ol>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  {% assign ch = site.data.chapters | where: "id", page.chapter | first %}
+  <ol>{% for s in ch.sections %}<li><a href="#{{ s.id }}" data-spy="{{ s.id }}"><b>{{ s.num }}</b>{{ s.title }}</a></li>{% endfor %}</ol>
+  {% endif %}
+</nav>

@@ -1,0 +1,43 @@
+{% comment %} Top of every page: brand, tabs with hover menus, breaking band, market strip, banner ad. {% endcomment %}
+{% assign chap = site.data.chapters | where: "id", page.chapter | first %}
+{% assign in_annex = false %}
+{% for a in site.data.annex %}{% if page.url == a.url %}{% assign in_annex = true %}{% endif %}{% endfor %}
+<header class="masthead">
+  <div class="brandbar">
+    <div class="wrap brandbar-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">financial<span>virus</span><em>Live</em></a>
+      <p class="brand-tag">The 2020 crash, followed stock by stock, sector by sector, region by region</p>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Parts of the story">
+    <div class="wrap tabs-inner">
+      <div class="tabitem"><a class="tab{% if page.home %} is-on{% endif %}" href="{{ '/' | relative_url }}"{% if page.home %} aria-current="page"{% endif %}>Home</a>
+        <div class="tab-panel">
+          <p class="tab-panel-title">The whole story, in one page</p>
+          <ul>{% for c in site.data.chapters %}<li><a href="{{ '/' | relative_url }}#ch-{{ c.id }}">{{ c.short }}</a></li>{% endfor %}</ul>
+        </div>
+      </div>
+      {% for c in site.data.chapters %}
+      <div class="tabitem"><a class="tab{% if c.id == page.chapter %} is-on{% endif %}" href="{{ c.url | relative_url }}"{% if c.id == page.chapter %} aria-current="page"{% endif %}>{{ c.tab }}</a>
+        <div class="tab-panel">
+          <p class="tab-panel-title"><a href="{{ c.url | relative_url }}">{{ c.title }}</a></p>
+          {% assign nsec = c.sections | size %}
+          {% if nsec > 0 %}<ul>{% for s in c.sections %}<li><a href="{{ c.url | relative_url }}#{{ s.id }}"><b>{{ s.num }}</b>{{ s.title }}</a></li>{% endfor %}</ul>{% else %}<p class="tab-panel-dek">{{ c.lead | truncatewords: 22 }}</p>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      <div class="tabitem tabitem-more"><a class="tab{% if in_annex %} is-on{% endif %}" href="{{ '/gallery/' | relative_url }}">More</a>
+        <div class="tab-panel">
+          <ul>{% for a in site.data.annex %}<li><a href="{{ a.url | relative_url }}">{{ a.title }}</a></li>{% endfor %}</ul>
+        </div>
+      </div>
+      {% for a in site.data.annex %}<a class="tab tab-mobile{% if page.url == a.url %} is-on{% endif %}" href="{{ a.url | relative_url }}">{{ a.title }}</a>{% endfor %}
+    </div>
+  </nav>
+  <div class="breaking">
+    <span class="breaking-tag">Breaking</span>
+    <span class="breaking-text">{% if page.breaking %}{{ page.breaking }}{% elsif chap %}{{ chap.breaking }}{% else %}{{ site.description }}{% endif %}</span>
+  </div>
+  {% include markets.html %}
+</header>
+{% include ad_banner.html %}

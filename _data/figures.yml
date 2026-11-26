@@ -1,0 +1,540 @@
+# Inventory of every figure (plan, section 8). One entry per figure.
+# status: todo | draft | done
+# prio: star (indispensable) | high | medium | low
+# effort: low | medium | high
+# file: path of the exported Plotly HTML, e.g. assets/figures/F1_1a.html.
+#       While empty, the site shows a placeholder with the question.
+# owner: who does it (fill in).
+
+# ---- 0. Intro and data
+- id: F0.1
+  chapter: intro
+  title: "The Covid wave"
+  question: "When did each stock join the crash, sector by sector?"
+  type: "Animated scatter: one dot per stock, x = onset day, y = sector, colour = size of the shock"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+  height: 520
+- id: F0.2
+  chapter: intro
+  title: "Active stocks per year"
+  question: "How many stocks can we see in each crisis?"
+  type: "Bars, with the three crises shaded"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F0.3
+  chapter: intro
+  title: "Stocks per sector, and the 11 sector colours"
+  question: "How are the stocks spread across sectors?"
+  type: "Bars (built into the site from the notebook counts)"
+  prio: medium
+  effort: low
+  owner: ""
+  status: done
+  builtin: sector_bars
+- id: F0.4
+  chapter: intro
+  title: "Coverage of the two sources over time"
+  question: "Which stocks does each source cover, and when?"
+  type: "Area chart: Kaggle until April 2020, Yahoo after, stocks that disappear"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+
+# ---- 1. Crises (RQ1)
+- id: F1.1a
+  chapter: crises
+  title: "The onset wave, crisis by crisis"
+  question: "Which sectors are hit first, and is it the same in every crisis?"
+  type: "Scatter stock x sector, with a crisis selector"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.1b
+  chapter: crises
+  title: "Infection curves per sector"
+  question: "Which sector takes off first?"
+  type: "Lines: cumulative share of stocks hit, one curve per sector"
+  prio: star
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.1c
+  chapter: crises
+  title: "Share of stocks hit at day 10 and day 30"
+  question: "How much of each sector is hit, crisis against crisis?"
+  type: "Grouped bars"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.1d
+  chapter: crises
+  title: "Onset dates per sector"
+  question: "Who falls first, and is it stable across crises?"
+  type: "Ridgeline"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.1e
+  chapter: crises
+  title: "Sensitivity to the threshold k"
+  question: "Does the order of sectors change if we move the threshold?"
+  type: "Heatmap k x sector (median onset), Kendall tau below"
+  prio: star
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.2a
+  chapter: crises
+  title: "Drawdown path of each sector"
+  question: "How far below its peak does each sector go?"
+  type: "Small multiples, crisis selector"
+  prio: star
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.2b
+  chapter: crises
+  title: "Maximum drawdown and recovery time"
+  question: "Which sectors lose the most, and how long do they take to recover?"
+  type: "Bars with a recovery-time mark"
+  prio: star
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.2c
+  chapter: crises
+  title: "Sector x crisis identity card"
+  question: "How does each sector fare from one crisis to the next?"
+  type: "Heatmap of maximum drawdown"
+  prio: star
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.3a
+  chapter: crises
+  title: "Defensive and cyclical indices"
+  question: "Do defensive stocks hold up better?"
+  type: "Two indices in base 100, one panel per crisis"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.3b
+  chapter: crises
+  title: "Defensive / cyclical drawdown ratio"
+  question: "Is defensive a stable property?"
+  type: "Bars with bootstrap intervals, one per crisis"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.4a
+  chapter: crises
+  title: "Scree plot"
+  question: "How many components matter?"
+  type: "Explained variance per component, one curve per crisis"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.4b
+  chapter: crises
+  title: "Biplot"
+  question: "Which features separate the stocks?"
+  type: "Stocks coloured by sector, arrows for features, crisis selector"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.4c
+  chapter: crises
+  title: "Loadings across crises"
+  question: "Do the same features dominate in every crisis?"
+  type: "Heatmap features x components, three crises side by side"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.4d
+  chapter: crises
+  title: "Weight of each sector"
+  question: "Beyond the market, which sectors drive prices?"
+  type: "Contribution of each sector to PC2, PC3"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F1.4e
+  chapter: crises
+  title: "Leave one crisis out"
+  question: "Learned on two crises, does it hold on the third?"
+  type: "Bars"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+
+# ---- 2. Stock to stock (RQ2)
+- id: F2.1a
+  chapter: contagion
+  title: "Choosing the sectors to study"
+  question: "Which sector does the rule pick, and which one is the control?"
+  type: "Coloured table, 11 sectors x 4 criteria"
+  prio: high
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.3a
+  chapter: contagion
+  title: "When do the shocks happen?"
+  question: "Where and when do the shocks occur?"
+  type: "Stacked bars per day and sector, market-wide crash days greyed"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.3b
+  chapter: contagion
+  title: "Event study: same sector against other sectors"
+  question: "Do neighbours react more strongly than the rest?"
+  type: "Mean CAR with bootstrap bands, two curves"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.3c
+  chapter: contagion
+  title: "Dose and response"
+  question: "Does a bigger shock bring a bigger reaction?"
+  type: "Scatter: size of the initial shock against mean CAR of neighbours"
+  prio: low
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.3d
+  chapter: contagion
+  title: "Cross-correlation of one pair"
+  question: "What is the typical lag?"
+  type: "Lagged correlation, one example pair"
+  prio: low
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.4a
+  chapter: contagion
+  title: "The lead-lag network"
+  question: "Do the links form sector clusters?"
+  type: "Directed graph, colour = sector, size = PageRank"
+  prio: star
+  effort: high
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.4b
+  chapter: contagion
+  title: "Top emitters"
+  question: "Which stocks lead the most others?"
+  type: "Bars by out-degree, coloured by sector"
+  prio: high
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.4c
+  chapter: contagion
+  title: "Sector x sector reaction at day 5"
+  question: "Does the reaction stay inside the sector?"
+  type: "Heatmap of CAR at day 5"
+  prio: high
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.2a
+  chapter: contagion
+  title: "Event study by firm size"
+  question: "Do big firms trigger more reactions?"
+  type: "Three CAR curves: small, medium, large"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.2b
+  chapter: contagion
+  title: "Out-degree against size"
+  question: "Are the leaders big, liquid or fragile?"
+  type: "Scatter, log scale"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.5a
+  chapter: contagion
+  title: "Event study of volumes"
+  question: "Does trading jump around a shock?"
+  type: "Volume z-score, same sector against other sectors"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.5b
+  chapter: contagion
+  title: "Volume before price?"
+  question: "Does volume move before the price of neighbours?"
+  type: "Lines, lag between volume and price"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.6a
+  chapter: contagion
+  title: "Permutation test"
+  question: "Could the effect be chance?"
+  type: "Histogram with shuffled sector labels, observed value as a vertical line"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F2.6b
+  chapter: contagion
+  title: "Robustness to our choices"
+  question: "Does the result hold for k = 2, 3, 4, with and without removing the market?"
+  type: "Lines"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+
+# ---- 3. Sectors (RQ3)
+- id: F3.1a
+  chapter: sectors
+  title: "From stocks to sectors"
+  question: "What does the network look like once grouped by sector?"
+  type: "Animation: the nodes of F2.4a gather into 11 sector bubbles"
+  prio: star
+  effort: high
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.1b
+  chapter: sectors
+  title: "Order of infection"
+  question: "In which order do the 11 sectors fall?"
+  type: "Bump chart or Gantt"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.1c
+  chapter: sectors
+  title: "Speed, breadth, intensity, attenuation"
+  question: "How does each sector go through the crash?"
+  type: "Small multiples, one per metric"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.1d
+  chapter: sectors
+  title: "Lead-lag between sectors"
+  question: "Which sector precedes which?"
+  type: "Matrix or 11-node graph"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.1e
+  chapter: sectors
+  title: "Attenuation along the way"
+  question: "Does the shock fade as it travels?"
+  type: "Scatter: delay after the origin sector against intensity, trend line"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.2a
+  chapter: sectors
+  title: "Onset dates, defensive against cyclical"
+  question: "Are defensive sectors hit later?"
+  type: "Violins"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.2b
+  chapter: sectors
+  title: "Two indices with their onset dates"
+  question: "Hit later, less, or recovered faster?"
+  type: "Lines (from F1.3a) with onset marks"
+  prio: medium
+  effort: low
+  owner: ""
+  status: todo
+  file: ""
+
+# ---- 4. Regions (RQ3)
+- id: F3.3a
+  chapter: sectors
+  title: "The crash on the world map"
+  question: "Is there a geographic wave?"
+  type: "Animated map: regions coloured by financial onset date, time slider"
+  prio: star
+  effort: high
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3b
+  chapter: sectors
+  title: "Epidemic curve per region"
+  question: "How do the two timelines compare?"
+  type: "Lines under the map, same time axis, vertical line tied to the slider"
+  prio: star
+  effort: high
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3c
+  chapter: sectors
+  title: "Market onset against epidemic onset"
+  question: "Did markets react before or after the virus?"
+  type: "Scatter, one dot per region, y = x line, Spearman correlation with interval"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3d
+  chapter: sectors
+  title: "Correlations between regions: calm, crisis, difference"
+  question: "Does the crisis bring regions closer?"
+  type: "Three heatmaps"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3e
+  chapter: sectors
+  title: "Mean correlation over time"
+  question: "When do the regions start moving together?"
+  type: "Line, 20-day rolling window"
+  prio: medium
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3f
+  chapter: sectors
+  title: "Lead-lag between regions"
+  question: "Which region precedes another?"
+  type: "Matrix"
+  prio: low
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F3.3g
+  chapter: sectors
+  title: "Sensitivity of the alignment"
+  question: "Does the result hold for other onset definitions?"
+  type: "Lines with bootstrap"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+
+# ---- 5. Conclusion
+- id: F4.1a
+  chapter: conclusion
+  title: "Data clusters against official sectors"
+  question: "Do the clusters found in the data match the sectors?"
+  type: "Sankey, ARI and NMI in the legend"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F4.1b
+  chapter: conclusion
+  title: "Agreement in calm and in crisis"
+  question: "Do sectors still describe stocks when things go wrong?"
+  type: "Bars of ARI and NMI, calm against crisis"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F4.1c
+  chapter: conclusion
+  title: "Profile of each cluster"
+  question: "How can we name each cluster?"
+  type: "Heatmap or radar of mean features"
+  prio: high
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""
+- id: F4.2
+  chapter: conclusion
+  title: "The big graph of stocks"
+  question: "What does the whole market look like as one network?"
+  type: "WebGL network"
+  prio: star
+  effort: high
+  owner: ""
+  status: todo
+  file: ""
+- id: F5.1
+  chapter: conclusion
+  title: "The zoom, replayed"
+  question: "Stock, sector, region: what did we find at each scale?"
+  type: "Summary visual"
+  prio: star
+  effort: medium
+  owner: ""
+  status: todo
+  file: ""

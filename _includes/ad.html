@@ -1,34 +1,14 @@
 {% comment %}
-  {% include ad.html %}            rotating ad (changes every 8 s)
-  {% include ad.html n=2 %}        the third ad of _data/ads.yml (0 = first)
-  {% include ad.html wide=true %}  full-width version, for between two sections
+  {% include ad.html %}          rotating ad
+  {% include ad.html n="2" %}    the third ad of _data/ads.yml (counting from 0)
 {% endcomment %}
-{% if include.n %}
-  {% assign one = site.data.ads[include.n] %}
-  {% include ad_card.html ad=one wide=include.wide %}
-{% else %}
-  <div class="ad-rotor">
-    {% for a in site.data.ads %}
-      {% include ad_card.html ad=a wide=include.wide %}
-    {% endfor %}
-  </div>
-  <noscript><style>.ad-rotor .ad:first-child{display:block}</style></noscript>
-  <script>
-  (function () {
-    var boxes = document.querySelectorAll('.ad-rotor');
-    for (var b = 0; b < boxes.length; b++) {
-      (function (box) {
-        var ads = box.querySelectorAll('.ad');
-        if (!ads.length) return;
-        var i = Math.floor(Math.random() * ads.length);
-        function show() {
-          for (var k = 0; k < ads.length; k++) { ads[k].classList.remove('on'); }
-          ads[i].classList.add('on');
-        }
-        show();
-        setInterval(function () { i = (i + 1) % ads.length; show(); }, 8000);
-      })(boxes[b]);
-    }
-  })();
-  </script>
-{% endif %}
+<aside class="break" aria-label="Commercial break">
+  <p class="break-title">Commercial break</p>
+  {% if include.n != nil %}
+    {% assign k = include.n | plus: 0 %}
+    {% assign one = site.data.ads[k] %}
+    {% include ad_card.html ad=one %}
+  {% else %}
+    <div class="ad-rotor">{% for a in site.data.ads %}{% include ad_card.html ad=a %}{% endfor %}</div>
+  {% endif %}
+</aside>

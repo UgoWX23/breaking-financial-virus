@@ -1,0 +1,51 @@
+---
+layout: default
+permalink: /gallery/
+kicker: "Annex"
+title: "Gallery"
+lead: "Every figure of the story in one place, with its question, its priority and its status. It doubles as the team's to-do board: it updates itself from _data/figures.yml."
+breaking: "Every figure of the story, and where it stands"
+---
+
+{% assign figs = site.data.figures %}
+{% assign n_all = figs | size %}
+{% assign n_done = figs | where: "status", "done" | size %}
+{% assign n_draft = figs | where: "status", "draft" | size %}
+{% assign n_star = figs | where: "prio", "star" | size %}
+<div class="board-sum">
+  <span><b>{{ n_all }}</b>figures</span>
+  <span><b>{{ n_star }}</b>indispensable</span>
+  <span><b>{{ n_draft }}</b>in draft</span>
+  <span><b>{{ n_done }}</b>done</span>
+</div>
+
+<div class="board-filter" role="group" aria-label="Filter figures">
+  <button type="button" class="is-on" data-filter="all">All</button>
+  <button type="button" data-filter="star">Indispensable</button>
+  <button type="button" data-filter="todo">To do</button>
+  <button type="button" data-filter="draft">Draft</button>
+  <button type="button" data-filter="done">Done</button>
+</div>
+
+{% for c in site.data.chapters %}
+{% assign cf = figs | where: "chapter", c.id %}
+{% assign ncf = cf | size %}
+{% if ncf > 0 %}
+<h2 class="board-chap"><a href="{{ c.url | relative_url }}">{{ c.short }}</a></h2>
+<div class="cards">
+  {% for fg in cf %}
+  <a class="card" href="{{ c.url | relative_url }}#fig-{{ fg.id | slugify }}" data-tags="{{ fg.status }} {{ fg.prio }}">
+    <span class="card-id">{{ fg.id }}</span>
+    <span class="card-title">{{ fg.title }}</span>
+    <span class="card-q">{{ fg.question }}</span>
+    <span class="chips">
+      <span class="chip chip-{{ fg.status }}">{{ fg.status }}</span>
+      {% if fg.prio == "star" %}<span class="chip chip-star">&#9733; indispensable</span>{% else %}<span class="chip">priority {{ fg.prio }}</span>{% endif %}
+      <span class="chip">effort {{ fg.effort }}</span>
+      {% if fg.owner and fg.owner != "" %}<span class="chip">{{ fg.owner }}</span>{% else %}<span class="chip">no owner yet</span>{% endif %}
+    </span>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endfor %}

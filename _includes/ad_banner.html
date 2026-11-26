@@ -1,0 +1,9 @@
+{% comment %} Full-width fictional ad under the masthead, like the banner of a finance portal. Rotates through _data/ads.yml. {% endcomment %}
+<div class="banner">
+  <div class="wrap banner-inner">
+    <div class="ad-rotor banner-rotor">
+      {% for a in site.data.ads %}{% include ad_card.html ad=a banner="yes" %}{% endfor %}
+    </div>
+    <p class="banner-side">Fictional ad. Losses may exceed deposits. So may correlations.</p>
+  </div>
+</div>

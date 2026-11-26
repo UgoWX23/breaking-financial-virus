@@ -1,0 +1,50 @@
+# The 11 sector colours, defined once and reused everywhere (F0.3).
+# Order matters: neighbours in this list are checked to stay distinguishable
+# for colour-blind readers. Do not reorder without re-checking.
+# With 11 colours, two sectors far apart in this list can look alike,
+# so every figure must also show the sector by position or by label.
+# covid_n: included stocks in the Covid window (notebook, section 6.1).
+- name: Financials
+  color: "#257de0"
+  group: cyclical
+  covid_n: 939
+- name: Industrials
+  color: "#f47230"
+  group: cyclical
+  covid_n: 377
+- name: Health Care
+  color: "#00b894"
+  group: defensive
+  covid_n: 549
+- name: Information Technology
+  color: "#6a4ce2"
+  group: cyclical
+  covid_n: 368
+- name: Real Estate
+  color: "#f2a600"
+  group: cyclical
+  covid_n: 210
+- name: Energy
+  color: "#008a17"
+  group: cyclical
+  covid_n: 205
+- name: Consumer Discretionary
+  color: "#ee7fac"
+  group: cyclical
+  covid_n: 302
+- name: Consumer Staples
+  color: "#1f5fbf"
+  group: defensive
+  covid_n: 136
+- name: Materials
+  color: "#a0612f"
+  group: cyclical
+  covid_n: 143
+- name: Communication Services
+  color: "#17a2b8"
+  group: mixed
+  covid_n: 126
+- name: Utilities
+  color: "#c0392b"
+  group: defensive
+  covid_n: 73

@@ -1,0 +1,73 @@
+<div class="stats">
+  <div class="stat"><b>8,049</b><span>stocks and ETFs in the starting dataset</span></div>
+  <div class="stat"><b>3</b><span>crises compared: dot-com, 2008, Covid</span></div>
+  <div class="stat"><b>6,506</b><span>stocks and ETFs usable in the Covid window</span></div>
+  <div class="stat"><b>24</b><span>trading days from the Covid peak to the trough</span></div>
+</div>
+
+{% capture c01_m %}
+For each stock, its **onset**: the first day its market-adjusted return falls more than k times below its own pre-crisis volatility. One dot per stock, placed on its onset day and its sector.
+{% endcapture %}
+{% capture c01_r %}
+*Expected reading, to replace with the result.* The dots should not form a vertical line on a single day: some sectors start earlier, others join late. That spread is what the rest of the site explains.
+{% endcapture %}
+{% capture c01_l %}
+Is the order of the dots a property of the crisis, or of the threshold k we chose? Chapter 1 tests it.
+{% endcapture %}
+{% include section.html id="wave" num="0.1" title="The Covid wave, in one picture" question="When did each stock join the crash?" measure=c01_m method="onset" figs="F0.1" wide="yes" read=c01_r read_label="What we expect to see" limit=c01_l %}
+
+{% capture c02_m %}
+- **A starting dataset** (Kaggle): one CSV per stock or ETF listed in the US, up to 1 April 2020.
+- **An extension with Yahoo Finance** (yfinance) to follow Covid after April 2020, frozen on the download of 1 and 2 November 2026.
+- **Sector labels** built from Yahoo and mapped to the 11 GICS sectors.
+
+The full pipeline is on the [Data page]({{ '/data/' | relative_url }}).
+{% endcapture %}
+{% capture c02_r %}
+The universe grows over time: 1,603 usable stocks for the dot-com, 2,739 for 2008 and 6,506 for Covid. Covid is almost complete, the older crises are seen through survivors only.
+{% endcapture %}
+{% capture c02_l %}
+The dataset only holds stocks still listed in 2020. Firms that disappeared during the dot-com or in 2008 are absent.
+{% endcapture %}
+{% include section.html id="why-data" num="0.2" title="Why this data" question="Where do the prices come from, and who is missing?" measure=c02_m figs="F0.2,F0.4" read=c02_r limit=c02_l %}
+
+{% capture c03_m %}
+Each stock gets one of the 11 GICS sectors. The colours are defined once, in `_data/sectors.yml`, and every figure of the site uses them. Health Care, Consumer Staples and Utilities form the **defensive** group, Communication Services is **mixed**, the other sectors are **cyclical**.
+{% endcapture %}
+{% capture c03_r %}
+Financials is by far the largest sector (939 stocks), Utilities the smallest (73). Small sectors give noisy results, so we sometimes pool them into the defensive and cyclical groups.
+{% endcapture %}
+{% capture c03_l %}
+28% of the Covid stocks have no sector label. They stay in market-level results and are left out of sector-level claims. Eleven colours cannot all be told apart, so every figure also shows the sector by position or by name.
+{% endcapture %}
+{% include section.html id="sectors-legend" num="0.3" title="Eleven sectors, eleven colours" question="How are the stocks spread across sectors?" measure=c03_m figs="F0.3" read=c03_r limit=c03_l %}
+
+{% include ad.html n="0" %}
+
+<section class="sub" id="limits">
+  <header class="sub-head">
+    <p class="sub-num">0.4</p>
+    <h2>What the data cannot tell</h2>
+    <p class="sub-q">Four limits to keep in mind on every page.</p>
+  </header>
+  <div class="cando">
+    <div class="no">
+      <h3>Known limits</h3>
+      <ul>
+        <li><b>Survivorship bias, twice.</b> Kaggle only holds firms listed in 2020, and Yahoo does not serve firms that have since disappeared.</li>
+        <li><b>Wrong adjusted prices.</b> <code>Adj Close</code> is wrong on 0.026% of the days. We correct it, but the rule is not perfect.</li>
+        <li><b>Sector labels.</b> They come from Yahoo, and 28% of Covid stocks have none.</li>
+        <li><b>Lead-lag is not causation.</b> When a stock moves before another, we say it precedes it, never that it causes it.</li>
+      </ul>
+    </div>
+    <div class="yes">
+      <h3>What we do about it</h3>
+      <ul>
+        <li>We announce the bias under every figure about the dot-com and 2008, and build the propagation chapters on Covid only.</li>
+        <li>We keep the correction rule visible and tested (93.8% agreement with Yahoo on the flagged days).</li>
+        <li>We report the unclassified stocks instead of guessing their sector.</li>
+        <li>We write "precursor", never "responsible".</li>
+      </ul>
+    </div>
+  </div>
+</section>
